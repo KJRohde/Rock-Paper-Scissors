@@ -9,20 +9,23 @@ namespace ShowMeRock
     class Hand
     {
         //member variable (has)
-        public string choice;
+        public List<string> options;
 
         //constructor (builds)
-        public Hand(string Choice)
+        public Hand(List<string> options)
         {
-            choice = Choice;
+            this.options = new List<string>();
+            options.Add("rock");
+            options.Add("paper");
+            options.Add("scissors");
+            options.Add("lizard");
+            options.Add("spock");
         }
 
         //methods (does)
-        public string AskChoice()
+        public string DisplayChoice()
         {
-            Console.WriteLine("What would you like to throw this round? Rock, paper, scissors, lizard, or spock?");
-            string inputChoice = Console.ReadLine();
-            return inputChoice;
+            Console.ReadLine(Player.choice);
         }
     }
 }
