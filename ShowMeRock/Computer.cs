@@ -10,8 +10,16 @@ namespace ShowMeRock
     {
         public override string ChooseGesture()
         {
-            gesture = "rock";
-            Console.WriteLine("player2 name chose list index()");
+            Random random = new Random();
+            List<string> gestures = new List<string>();
+            gestures.Add("rock");
+            gestures.Add("paper");
+            gestures.Add("scissors");
+            gestures.Add("lizard");
+            gestures.Add("spock");
+            int computerChoice = random.Next(gestures.Count);
+            gesture = gestures[computerChoice];
+            Console.WriteLine("");
             return gesture;
         }
         public override string ChooseName()
@@ -20,5 +28,6 @@ namespace ShowMeRock
             playerName = "Billy Bob";
             return playerName;
         }
+
     }
 }

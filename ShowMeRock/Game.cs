@@ -42,12 +42,16 @@ namespace ShowMeRock
             if (numberOfPlayers == 1)
             {
                 player1 = new Human();
+                player1.ChooseName();
                 player2 = new Computer();
+                player2.ChooseName();
             }
             else if (numberOfPlayers == 2)
             {
                 player1 = new Human();
+                player1.ChooseName();
                 player2 = new Human();
+                player2.ChooseName();
             }
         }
         public void RunGame()
@@ -60,19 +64,19 @@ namespace ShowMeRock
                 player1Choice = player1.ChooseGesture();
                 player2Choice = player2.ChooseGesture();
 
-                Console.WriteLine("\nPlayer 1 chose" + player1Choice);
-                Console.WriteLine("Plyer 2 chose" + player2Choice);
+                Console.WriteLine("\n" + player1.playerName + " chose " + player1Choice);
+                Console.WriteLine("\n" + player2.playerName + " chose " + player2Choice);
 
                 if (player1Choice == "rock")
                 {
                     if (player2Choice == "scissors" || player2Choice == "lizard")
                     {
-                        Console.WriteLine("Player 1 wins this round!\n");
+                        Console.WriteLine(player1.playerName + " wins this round!\n");
                         player1WinCounter++;
                     }
                     else if (player2Choice == "paper" || player2Choice == "spock")
                     {
-                        Console.WriteLine("Player 2 wins this round!\n");
+                        Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
                     else
@@ -84,12 +88,12 @@ namespace ShowMeRock
                 {
                     if (player2Choice == "rock" || player2Choice == "spock")
                     {
-                        Console.WriteLine("Player 1 wins this round!\n");
+                        Console.WriteLine(player1.playerName + " wins this round!\n");
                         player1WinCounter++;
                     }
                     else if (player2Choice == "scissors" || player2Choice == "lizard")
                     {
-                        Console.WriteLine("Player 2 wins this round!\n");
+                        Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
                     else
@@ -101,12 +105,12 @@ namespace ShowMeRock
                 {
                     if (player2Choice == "paper" || player2Choice == "lizard")
                     {
-                        Console.WriteLine("Player 1 wins this round!\n");
+                        Console.WriteLine(player1.playerName + " wins this round!\n");
                         player1WinCounter++;
                     }
                     else if (player2Choice == "rock" || player2Choice == "spock")
                     {
-                        Console.WriteLine("Player 2 wins this round!\n");
+                        Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
                     else
@@ -118,12 +122,12 @@ namespace ShowMeRock
                 {
                     if (player2Choice == "paper" || player2Choice == "spock")
                     {
-                        Console.WriteLine("Player 1 wins this round!\n");
+                        Console.WriteLine(player1.playerName + " wins this round!\n");
                         player1WinCounter++;
                     }
                     else if (player2Choice == "scissors" || player2Choice == "rock")
                     {
-                        Console.WriteLine("Player 2 wins this round!\n");
+                        Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
                     else
@@ -135,12 +139,12 @@ namespace ShowMeRock
                 {
                     if (player2Choice == "scissors" || player2Choice == "rock")
                     {
-                        Console.WriteLine("Player 1 wins this round!\n");
+                        Console.WriteLine(player1.playerName + " wins this round!\n");
                         player1WinCounter++;
                     }
                     else if (player2Choice == "paper" || player2Choice == "lizard")
                     {
-                        Console.WriteLine("Player 2 wins this round!\n");
+                        Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
                     else
@@ -157,11 +161,11 @@ namespace ShowMeRock
         {
             if (player1WinCounter == winningThreshold)
             {
-                Console.WriteLine("Player 1 won the game!\n");
+                Console.WriteLine(player1.playerName + " won the game!\n");
             }
             else if (player2WinCounter == winningThreshold)
             {
-                Console.WriteLine("Player 2 won the game!\n");
+                Console.WriteLine(player2.playerName + " won the game!\n");
             }
             Console.WriteLine("Game over!");
             Console.ReadLine();

@@ -16,7 +16,7 @@ namespace ShowMeRock
         }
         public override string ChooseName()
         {
-            Console.WriteLine("The player is named player name");
+            Console.WriteLine("Please enter a name for your player");
             playerName = Console.ReadLine();
             return playerName;
         }
