@@ -21,7 +21,6 @@ namespace ShowMeRock
         //constructor (builds)
         public Game()
         {
-            winningThreshold = 3;
             player1WinCounter = 0;
             player2WinCounter = 0;
         }
@@ -29,13 +28,32 @@ namespace ShowMeRock
         //methods (does)
         private void DisplayRules()
         {
-            Console.WriteLine("Each player will choose rock, paper, scissors, lizard or spock, and their choices will be compared to see who wins each round.");
+            Console.WriteLine("Each player will choose rock, paper, scissors, lizard or spock, and their choices will be compared to see who wins.");
+            Console.WriteLine("Rock crushes scissors\nScissors cuts paper\nPaper covers rock\nRock crushes lizard\nPaper disproves spock\nLizard eats paper\nSpock crushes scissors\nScissors decapitates lizard\nLizard poisons spock\nSpock vaporizes rock");
         }
         private int GetNumberOfPlayers()
         {
             Console.WriteLine("How many human players are present?");
-            numberOfPlayers = int.Parse(Console.ReadLine());
+            while (int.TryParse(Console.ReadLine(), out numberOfPlayers) && numberOfPlayers > 2 || numberOfPlayers < 1)
+            {
+                Console.WriteLine("This game is for a maximum of 2 players and minimum of 1 player");
+            }
             return numberOfPlayers;
+            //    if (numberOfPlayers < 1 || numberOfPlayers > 2)
+            //    {
+            //        Console.WriteLine("There must be at least 1 human player, but no more than 2.");
+            //        return GetNumberOfPlayers();
+            //    }
+            //    else
+            //    {
+            //        return numberOfPlayers;
+            //    }
+            //}
+            //else if (numberOfPlayers == false)
+            //{
+            //    Console.WriteLine("You must enter a number. 1 or 2");
+            //    return GetNumberOfPlayers();
+            //}
         }
         private void setupPlayers(int numberOfPlayers)
         {
@@ -54,18 +72,25 @@ namespace ShowMeRock
                 player2.ChooseName();
             }
         }
+        private int GetNumberOfGames()
+        {
+            Console.WriteLine("How many round victories will this contest take to win?");
+            winningThreshold = int.Parse(Console.ReadLine());
+            return winningThreshold;
+        }
         public void RunGame()
         {
             DisplayRules();
             numberOfPlayers = GetNumberOfPlayers();
             setupPlayers(numberOfPlayers);
+            GetNumberOfGames();
             while (player1WinCounter < winningThreshold && player2WinCounter < winningThreshold)
             {
                 player1Choice = player1.ChooseGesture();
                 player2Choice = player2.ChooseGesture();
 
                 Console.WriteLine("\n" + player1.playerName + " chose " + player1Choice);
-                Console.WriteLine("\n" + player2.playerName + " chose " + player2Choice);
+                Console.WriteLine("\n" + player2.playerName + " chose " + player2Choice + "\n");
 
                 if (player1Choice == "rock")
                 {
@@ -172,7 +197,7 @@ namespace ShowMeRock
         }
         private void DisplayScore()
         {
-            Console.WriteLine("\n Player1 has " + player1WinCounter + " wins. Player2 has " + player2WinCounter + " wins.");
+            Console.WriteLine("\n" + player1.playerName + " has " + player1WinCounter + " wins. " + player2.playerName + " has " + player2WinCounter + " wins.");
         }
     }
 }
