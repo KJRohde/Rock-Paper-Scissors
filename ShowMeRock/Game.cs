@@ -29,31 +29,16 @@ namespace ShowMeRock
         private void DisplayRules()
         {
             Console.WriteLine("Each player will choose rock, paper, scissors, lizard or spock, and their choices will be compared to see who wins.");
-            Console.WriteLine("Rock crushes scissors\nScissors cuts paper\nPaper covers rock\nRock crushes lizard\nPaper disproves spock\nLizard eats paper\nSpock crushes scissors\nScissors decapitates lizard\nLizard poisons spock\nSpock vaporizes rock");
+            Console.WriteLine("Rock crushes scissors\nScissors cuts paper\nPaper covers rock\nRock crushes lizard\nPaper disproves spock\nLizard eats paper\nSpock crushes scissors\nScissors decapitates lizard\nLizard poisons spock\nSpock vaporizes rock\nAnd whatever you do... DO NOT THROW FLAMINGO");
         }
         private int GetNumberOfPlayers()
         {
-            Console.WriteLine("How many human players are present?");
+            Console.WriteLine("\nHow many human players are present?");
             while (int.TryParse(Console.ReadLine(), out numberOfPlayers) && numberOfPlayers > 2 || numberOfPlayers < 1)
             {
-                Console.WriteLine("This game is for a maximum of 2 players and minimum of 1 player");
+                Console.WriteLine("This game is for a maximum of 2 players and minimum of 1 player. Please enter the number 1 or 2.");
             }
             return numberOfPlayers;
-            //    if (numberOfPlayers < 1 || numberOfPlayers > 2)
-            //    {
-            //        Console.WriteLine("There must be at least 1 human player, but no more than 2.");
-            //        return GetNumberOfPlayers();
-            //    }
-            //    else
-            //    {
-            //        return numberOfPlayers;
-            //    }
-            //}
-            //else if (numberOfPlayers == false)
-            //{
-            //    Console.WriteLine("You must enter a number. 1 or 2");
-            //    return GetNumberOfPlayers();
-            //}
         }
         private void setupPlayers(int numberOfPlayers)
         {
@@ -61,6 +46,7 @@ namespace ShowMeRock
             {
                 player1 = new Human();
                 player1.ChooseName();
+                Console.WriteLine("Player 1 chose to be called " + player1.playerName + ".");
                 player2 = new Computer();
                 player2.ChooseName();
             }
@@ -68,13 +54,20 @@ namespace ShowMeRock
             {
                 player1 = new Human();
                 player1.ChooseName();
+                Console.WriteLine("Player 1 chose to be called " + player1.playerName + ".");
                 player2 = new Human();
                 player2.ChooseName();
+                if (player1.playerName == player2.playerName)
+                {
+                    Console.WriteLine("Please enter a name for player 2 that is different from player 1!");
+                    player2.ChooseName();
+                }
+                Console.WriteLine("Player 2 chose to be called " + player2.playerName + ".");
             }
         }
         private int GetNumberOfGames()
         {
-            Console.WriteLine("How many round victories will this contest take to win?");
+            Console.WriteLine("\nHow many round victories will this contest take to win?");
             winningThreshold = int.Parse(Console.ReadLine());
             return winningThreshold;
         }
@@ -84,10 +77,15 @@ namespace ShowMeRock
             numberOfPlayers = GetNumberOfPlayers();
             setupPlayers(numberOfPlayers);
             GetNumberOfGames();
+            Console.Clear();
             while (player1WinCounter < winningThreshold && player2WinCounter < winningThreshold)
             {
+                Console.WriteLine("It is now " + player1.playerName + "'s turn.");
                 player1Choice = player1.ChooseGesture();
+                Console.Clear();
+                Console.WriteLine("It is now " + player2.playerName + "'s turn.");
                 player2Choice = player2.ChooseGesture();
+                Console.Clear();
 
                 Console.WriteLine("\n" + player1.playerName + " chose " + player1Choice);
                 Console.WriteLine("\n" + player2.playerName + " chose " + player2Choice + "\n");
@@ -104,9 +102,13 @@ namespace ShowMeRock
                         Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
-                    else
+                    else if (player1Choice == player2Choice)
                     {
                         Console.WriteLine("This round was a tie!\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Somebody entered an incorrect gesture. This round may not assign a win");
                     }
                 }
                 if (player1Choice == "paper")
@@ -121,9 +123,13 @@ namespace ShowMeRock
                         Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
-                    else
+                    else if (player1Choice == player2Choice)
                     {
                         Console.WriteLine("This round was a tie!\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Somebody entered an incorrect gesture. This round may not assign a win");
                     }
                 }
                 if (player1Choice == "scissors")
@@ -138,9 +144,13 @@ namespace ShowMeRock
                         Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
-                    else
+                    else if (player1Choice == player2Choice)
                     {
                         Console.WriteLine("This round was a tie!\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Somebody entered an incorrect gesture. This round may not assign a win");
                     }
                 }
                 if (player1Choice == "lizard")
@@ -155,9 +165,13 @@ namespace ShowMeRock
                         Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
-                    else
+                    else if (player1Choice == player2Choice)
                     {
                         Console.WriteLine("This round was a tie!\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Somebody entered an incorrect gesture. This round may not assign a win");
                     }
                 }
                 if (player1Choice == "spock")
@@ -172,13 +186,36 @@ namespace ShowMeRock
                         Console.WriteLine(player2.playerName + " wins this round!\n");
                         player2WinCounter++;
                     }
-                    else
+                    else if (player1Choice == player2Choice)
                     {
                         Console.WriteLine("This round was a tie!\n");
                     }
+                    else
+                    {
+                        Console.WriteLine("Somebody entered an incorrect gesture. This round may not assign a win.");
+                    }
+                }
+                if (player1Choice == "flamingo" && player2Choice != "flamingo")
+                    {
+                        player1WinCounter = 0;
+                        player2WinCounter = winningThreshold;
+                    }
+                if (player2Choice == "flamingo" && player1Choice != "flamingo")
+                    {
+                        player2WinCounter = 0;
+                        player1WinCounter = winningThreshold;
+                    }
+                if (player1Choice == "flamingo" && player2Choice == "flamingo")
+                {
+                    player1WinCounter = 0;
+                    player2WinCounter = 0;
+                    Console.WriteLine("Neither one of you deserve to win...\ntry again and play the damn game.");
+                    Console.ReadLine();
+                    break;
                 }
                 DisplayScore();
                 Console.ReadLine();
+                Console.Clear();
             }
             DisplayWinner();
         }
@@ -186,18 +223,22 @@ namespace ShowMeRock
         {
             if (player1WinCounter == winningThreshold)
             {
-                Console.WriteLine(player1.playerName + " won the game!\n");
+                Console.WriteLine(player1.playerName + " won the game!\nNice try " + player2.playerName + "!");
             }
             else if (player2WinCounter == winningThreshold)
             {
-                Console.WriteLine(player2.playerName + " won the game!\n");
+                Console.WriteLine(player2.playerName + " won the game!\nNice try " + player1.playerName + "!");
+            }
+            else
+            {
+                Console.WriteLine("You were warned.");
             }
             Console.WriteLine("Game over!");
             Console.ReadLine();
         }
         private void DisplayScore()
         {
-            Console.WriteLine("\n" + player1.playerName + " has " + player1WinCounter + " wins. " + player2.playerName + " has " + player2WinCounter + " wins.");
+            Console.WriteLine("\nIn this best of " + (2*(winningThreshold) - 1) + " contest, " + player1.playerName + " has " + player1WinCounter + " wins. " + player2.playerName + " has " + player2WinCounter + " wins.");
         }
     }
 }

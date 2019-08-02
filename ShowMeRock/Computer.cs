@@ -24,7 +24,7 @@ namespace ShowMeRock
         }
         public override string ChooseName()
         {
-            Console.WriteLine("The computer player is named Billy Bob");
+            Console.WriteLine("\nThe computer player is named Billy Bob");
             playerName = "Billy Bob";
             return playerName;
         }
