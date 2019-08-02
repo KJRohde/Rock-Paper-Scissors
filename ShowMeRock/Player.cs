@@ -11,7 +11,6 @@ namespace ShowMeRock
         //member variable (has)
         public string gesture;
         public string playerName;
-        public int winCounter;
 
         //methods (does)
         public abstract string ChooseName();

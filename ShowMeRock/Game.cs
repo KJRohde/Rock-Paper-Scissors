@@ -67,8 +67,11 @@ namespace ShowMeRock
         }
         private int GetNumberOfGames()
         {
-            Console.WriteLine("\nHow many round victories will this contest take to win?");
-            winningThreshold = int.Parse(Console.ReadLine());
+            Console.WriteLine("\nHow many round victories will this contest take to win?\nThe maximum number of wins required is 10.");
+            while (int.TryParse(Console.ReadLine(), out winningThreshold) && winningThreshold >= 10 || winningThreshold < 1)
+            {
+                Console.WriteLine("The maximum number of games to win is 10.");
+            }
             return winningThreshold;
         }
         public void RunGame()
